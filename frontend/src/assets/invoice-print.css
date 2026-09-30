@@ -1,0 +1,541 @@
+/*
+ * ============================================================================
+ *  LAYOUT CETAK INVOICE
+ * ============================================================================
+ *
+ *  Diports dari <style> di backend/resources/views/invoices/print.blade.php.
+ *  Nilai diklik dari template PDF (resources/views/invoices/pdf/sewa.blade.php)
+ *  supaya hasil cetak di layar dan hasil PDF.domPDF punya tinggi baris yang
+ *  sama. Kalau keduanya berbeda, yang dipratinjau terlihat pas tapi yang
+ *  keluar dari printer meluber ke halaman kedua.
+ *
+ *  Semua ukuran dalam pt, bukan px, karena tujuannya dicetak ke kertas.
+ *
+ * Aturan @page hanya berlaku saat jendela cetak yang terbuka, jadi aturan
+ * ini tidak mengubah apa yang tampil di layar.
+ */
+
+.inv-sheet {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+.inv-sheet *,
+.inv-sheet *::before,
+.inv-sheet *::after {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+.inv-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    color: #1e293b;
+    font-size: 8pt;
+    background: #f1f5f9;
+}
+
+.inv-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 16px auto;
+    padding: 8mm 12mm 6mm;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.inv-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.inv-logo {
+    width: 45px;
+    height: 45px;
+    background: #1e3a5f;
+    color: #fff;
+    font-weight: 900;
+    font-size: 14pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.inv-header-info {
+    flex: 1;
+}
+
+.inv-company {
+    font-size: 14pt;
+    font-weight: 900;
+    color: #1e3a5f;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+}
+
+.inv-company-sub {
+    font-size: 7pt;
+    color: #475569;
+    margin-top: 1px;
+}
+
+.inv-company-addr {
+    font-size: 6.5pt;
+    color: #64748b;
+    margin-top: 1px;
+}
+
+.inv-doc {
+    text-align: right;
+    border: 1.5px solid #1e3a5f;
+    padding: 4px 8px;
+    min-width: 130px;
+}
+
+.inv-doc-label {
+    font-size: 6pt;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inv-doc-value {
+    font-size: 7.5pt;
+    font-weight: 800;
+    color: #1e3a5f;
+    margin-top: 1px;
+}
+
+.inv-doc-date {
+    font-size: 6.5pt;
+    color: #475569;
+    margin-top: 1px;
+}
+
+.inv-divider {
+    height: 3px;
+    background: #1e3a5f;
+    margin: 4px 0 8px;
+}
+
+.inv-title {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #1e3a5f;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.inv-subtitle {
+    text-align: center;
+    font-size: 7.5pt;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.inv-info-grid {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.inv-info-box {
+    flex: 1;
+    border: 1px solid #cbd5e1;
+}
+
+.inv-info-box-header {
+    background: #1e3a5f;
+    color: #fff;
+    font-size: 6.5pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+}
+
+.inv-info-table {
+    width: 100%;
+    font-size: 7pt;
+    color: #334155;
+    padding: 3px 8px;
+    border-collapse: collapse;
+}
+
+.inv-info-table td {
+    padding: 1.5px 4px;
+    vertical-align: top;
+}
+
+.inv-info-table td:first-child {
+    color: #64748b;
+    width: 32%;
+    white-space: nowrap;
+}
+
+.inv-note {
+    border: 1px solid #cbd5e1;
+    padding: 6px 8px;
+    margin-bottom: 8px;
+    font-size: 7pt;
+}
+
+.inv-items {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 7.5pt;
+    margin-bottom: 8px;
+}
+
+.inv-items th {
+    background: #1e3a5f;
+    color: #fff;
+    font-size: 6.5pt;
+    font-weight: 700;
+    padding: 3px 8px;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inv-items td {
+    padding: 3px 8px;
+    border-bottom: 0.5px solid #e2e8f0;
+}
+
+.inv-items tr:last-child td {
+    border-bottom: none;
+}
+
+.inv-right {
+    text-align: right;
+}
+
+.inv-center {
+    text-align: center;
+}
+
+.inv-totals {
+    border-top: 2px solid #1e3a5f;
+    margin-top: 4px;
+    padding-top: 4px;
+    text-align: right;
+    font-size: 8pt;
+}
+
+.inv-total-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    padding: 2px 0;
+}
+
+.inv-total-label {
+    font-weight: 600;
+    color: #475569;
+}
+
+.inv-total-value {
+    font-weight: 700;
+    min-width: 90px;
+    text-align: right;
+}
+
+.inv-grand-total {
+    font-size: 11pt;
+    font-weight: 900;
+    color: #1e3a5f;
+    border-top: 1px solid #1e3a5f;
+    padding-top: 4px;
+    margin-top: 2px;
+}
+
+.inv-empty {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.inv-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 6.5pt;
+    font-weight: 700;
+}
+
+.inv-badge-done {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.inv-badge-wip {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.inv-terbilang {
+    font-size: 6.5pt;
+    color: #475569;
+    font-style: italic;
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 0.5px dashed #cbd5e1;
+}
+
+.inv-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 12px;
+}
+
+.inv-qr {
+    text-align: center;
+}
+
+.inv-qr svg {
+    display: block;
+    margin: 0 auto 2px;
+}
+
+.inv-qr-label {
+    font-size: 5.5pt;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inv-ttd {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    flex: 1;
+    max-width: 70%;
+}
+
+.inv-ttd-block {
+    text-align: center;
+}
+
+.inv-ttd-label {
+    font-size: 7pt;
+    font-weight: 700;
+    color: #1e3a5f;
+}
+
+.inv-ttd-space {
+    height: 40px;
+}
+
+.inv-ttd-sign {
+    height: 42px;
+    padding-top: 4px;
+}
+
+.inv-ttd-sign img {
+    max-height: 38px;
+    max-width: 130px;
+}
+
+.inv-ttd-meta {
+    font-size: 5.5pt;
+    color: #64748b;
+    margin-top: 1px;
+}
+
+.inv-ttd-line {
+    font-size: 7pt;
+    color: #1e293b;
+    border-top: 1px solid #334155;
+    padding-top: 2px;
+    min-width: 110px;
+}
+
+.inv-ttd-kota {
+    font-size: 7pt;
+    color: #334155;
+    margin-bottom: 1px;
+}
+
+/* ── Tombol & panel di luar kertas cetak ────────────────────────────────── */
+
+.inv-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 10px 16px;
+    background: #0f172a;
+    color: #fff;
+}
+
+.inv-toolbar-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.inv-toolbar-sub {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.inv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: background-color 0.15s, opacity 0.15s;
+}
+
+.inv-btn-primary {
+    background: #1e3a5f;
+    color: #fff;
+}
+
+.inv-btn-primary:hover {
+    background: #2c4f7c;
+}
+
+.inv-btn-ghost {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+}
+
+.inv-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.inv-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* ── Panel tanda tangan ─────────────────────────────────────────────────── */
+
+.inv-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(15, 23, 42, 0.6);
+}
+
+.inv-modal {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    width: 100%;
+    max-width: 34rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+.inv-field-label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
+    margin-bottom: 0.25rem;
+}
+
+.inv-field {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: #1e293b;
+}
+
+.inv-field:focus {
+    outline: none;
+    border-color: #1e3a5f;
+    box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+}
+
+.inv-field-error {
+    border-color: #e11d48;
+}
+
+.inv-alert {
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+}
+
+.inv-alert-error {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    color: #9f1239;
+}
+
+.inv-alert-warn {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+}
+
+.inv-alert-info {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+}
+
+/* ── Khusus tampilan layar ─────────────────────────────────────────────── */
+
+@media screen {
+    .inv-hide-screen {
+        display: none;
+    }
+}
+
+/* ── Saat dicetak ───────────────────────────────────────────────────────── */
+
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        background: #fff !important;
+    }
+
+    .inv-page {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 8mm 12mm 6mm;
+        box-shadow: none;
+    }
+
+    .inv-hide-print {
+        display: none !important;
+    }
+}

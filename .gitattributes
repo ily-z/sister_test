@@ -1,0 +1,23 @@
+* text=auto eol=lf
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+*.vue diff=html
+*.yml diff=yaml
+
+# Build artifacts & vendor: jangan ikut export
+/backend/vendor export-ignore
+/backend/node_modules export-ignore
+/backend/public/build export-ignore
+/backend/storage/logs export-ignore
+/frontend/node_modules export-ignore
+/frontend/dist export-ignore
+
+# Docs & tooling
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
+/docs/design-reference export-ignore

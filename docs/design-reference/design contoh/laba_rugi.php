@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Finance Dashboard - FleetControl</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Theme Configuration -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-tint": "#4d44e3",
+                        "primary": "#3525cd",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-container-high": "#eae6f4",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e1ee",
+                        "secondary-container": "#6063ee",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "on-error-container": "#93000a",
+                        "surface": "#fcf8ff",
+                        "on-surface-variant": "#464555",
+                        "on-surface": "#1b1b24",
+                        "primary-fixed": "#e2dfff",
+                        "outline-variant": "#c7c4d8",
+                        "secondary": "#4648d4",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "tertiary-container": "#a44100",
+                        "surface-container": "#f0ecf9",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f2ff",
+                        "primary-container": "#4f46e5",
+                        "on-background": "#1b1b24",
+                        "on-tertiary-container": "#ffd2be",
+                        "surface-container-highest": "#e4e1ee",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#dcd8e5",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#c3c0ff",
+                        "background": "#fcf8ff",
+                        "inverse-on-surface": "#f3effc",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "tertiary-fixed": "#ffdbcc",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#777587",
+                        "on-secondary-fixed": "#07006c",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "inverse-surface": "#302f39",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-primary-container": "#dad7ff",
+                        "tertiary": "#7e3000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "margin": "32px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h1": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "h1": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-hidden flex">
+    <!-- JSON Component: SideNavBar -->
+    <nav
+        class="bg-white dark:bg-gray-900 h-screen w-64 border-r fixed left-0 top-0 border-r border-gray-100 dark:border-gray-800 shadow-sm z-50">
+        <div class="flex flex-col h-full py-6">
+            <!-- Brand Logo -->
+            <div class="px-6 mb-8 flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center">
+                    <span class="material-symbols-outlined filled text-[20px]">directions_car</span>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight text-indigo-600 dark:text-indigo-400 leading-none">
+                        FleetControl</h1>
+                    <p class="font-label-sm text-label-sm text-outline uppercase tracking-wider mt-1">Admin Terminal</p>
+                </div>
+            </div>
+            <!-- Navigation Links -->
+            <div class="flex-1 overflow-y-auto space-y-1">
+                <!-- Dashboard -->
+                <a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-body-sm text-body-sm transition-all duration-200 ease-in-out hover:text-indigo-600"
+                    href="#">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+                <!-- Fleet -->
+                <a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-body-sm text-body-sm transition-all duration-200 ease-in-out hover:text-indigo-600"
+                    href="#">
+                    <span class="material-symbols-outlined">directions_car</span>
+                    Fleet
+                </a>
+                <!-- Bookings -->
+                <a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-body-sm text-body-sm transition-all duration-200 ease-in-out hover:text-indigo-600"
+                    href="#">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    Bookings
+                </a>
+                <!-- Finance (Active) -->
+                <a class="flex items-center gap-3 px-4 py-3 text-indigo-600 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/20 font-semibold border-r-4 border-indigo-600 font-body-sm text-body-sm transition-all duration-200 ease-in-out"
+                    href="#">
+                    <span class="material-symbols-outlined filled">payments</span>
+                    Finance
+                </a>
+                <!-- Invoices -->
+                <a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-body-sm text-body-sm transition-all duration-200 ease-in-out hover:text-indigo-600"
+                    href="#">
+                    <span class="material-symbols-outlined">description</span>
+                    Invoices
+                </a>
+            </div>
+            <!-- Settings (Bottom) -->
+            <div class="px-4 mt-auto">
+                <a class="flex items-center gap-3 px-4 py-3 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-body-sm text-body-sm transition-all duration-200 ease-in-out hover:text-indigo-600 rounded-lg"
+                    href="#">
+                    <span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- JSON Component: TopNavBar -->
+    <header
+        class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 border-b border-gray-100 dark:border-gray-800">
+        <div class="flex justify-between items-center px-8 w-full h-full">
+            <div
+                class="flex items-center gap-4 text-indigo-600 dark:text-indigo-400 font-inter text-base text-indigo-600 font-bold">
+                Laba Rugi (Finance)
+            </div>
+            <div class="flex items-center gap-4">
+                <!-- Search on right -->
+                <div class="relative hidden md:block">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[20px]">search</span>
+                    <input
+                        class="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 w-64 transition-all outline-none text-gray-600"
+                        placeholder="Search finance..." type="text" />
+                </div>
+                <button
+                    class="p-2 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-opacity active:opacity-70">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <button
+                    class="p-2 text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg cursor-pointer transition-opacity active:opacity-70">
+                    <span class="material-symbols-outlined">help_outline</span>
+                </button>
+                <div
+                    class="h-8 w-8 rounded-full bg-indigo-100 border border-indigo-200 overflow-hidden ml-2 cursor-pointer transition-opacity active:opacity-70 shadow-sm">
+                    <img alt="User Profile" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJUecJwWtBcCK8mQXUV-wUcdsaKQ_dMN1JMGProcZZx7vEHp_Twn4fLpq-5xseqWkT29nyAMaxxe8hz_ls_-SvMznbQjQLBL9CaNh2MBUXzVNHtpbgZouji1GrmrSpQns23qmnVHudpC4_N-NUGGu9GPNi8fDWLK_fjFrfhAvYy17LO29U4fOlb7fTlrNKyHQRHYtxCVeJNKAg7XRMCHfjbfM_N4VblViAlfOVikXPEt5Tk4nhbNQqwQsnJ4E8T4SUA7l4rFrWTsg" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="flex-1 ml-64 mt-16 h-[calc(100vh-4rem)] overflow-y-auto bg-background p-margin">
+        <div class="max-w-7xl mx-auto space-y-lg">
+            <!-- Page Header & Actions -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="font-h2 text-h2 text-on-surface">Laba Rugi (Profit &amp; Loss)</h2>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Overview of financial performance
+                        and operational costs.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg hover:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-sm">
+                        <span
+                            class="material-symbols-outlined text-[18px] text-on-surface-variant">calendar_month</span>
+                        <span class="font-label-md text-label-md text-on-surface">Jan 2023 - Dec 2023</span>
+                        <span class="material-symbols-outlined text-[18px] text-on-surface-variant">expand_more</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg hover:bg-surface-tint shadow-sm transition-all">
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+                        <span class="font-label-md text-label-md">Export Report</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Summary Cards (Bento Grid Style) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Total Pemasukan -->
+                <div
+                    class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-surface-container-highest flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-4">
+                        <div
+                            class="h-10 w-10 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
+                            <span class="material-symbols-outlined">trending_up</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-label-sm text-label-sm">
+                            <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                            12.5%
+                        </span>
+                    </div>
+                    <div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Total Pemasukan</p>
+                        <h3 class="font-h1 text-h1 text-on-surface">Rp 845.200.000</h3>
+                    </div>
+                </div>
+                <!-- Total Pengeluaran -->
+                <div
+                    class="bg-surface-container-lowest rounded-xl p-lg shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-surface-container-highest flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="h-10 w-10 rounded-lg bg-red-50 flex items-center justify-center text-error">
+                            <span class="material-symbols-outlined">trending_down</span>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-50 text-error font-label-sm text-label-sm">
+                            <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                            4.2%
+                        </span>
+                    </div>
+                    <div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Total Pengeluaran</p>
+                        <h3 class="font-h1 text-h1 text-on-surface">Rp 312.450.000</h3>
+                    </div>
+                </div>
+                <!-- Laba Bersih -->
+                <div
+                    class="bg-primary text-on-primary rounded-xl p-lg shadow-[0_8px_32px_rgba(53,37,205,0.2)] flex flex-col justify-between relative overflow-hidden">
+                    <!-- Decorative subtle circle -->
+                    <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/10 blur-2xl"></div>
+                    <div class="flex items-start justify-between mb-4 relative z-10">
+                        <div
+                            class="h-10 w-10 rounded-lg bg-white/20 flex items-center justify-center text-white backdrop-blur-sm">
+                            <span class="material-symbols-outlined">account_balance_wallet</span>
+                        </div>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="font-body-sm text-body-sm text-primary-fixed-dim mb-1">Laba Bersih (Net Profit)</p>
+                        <h3 class="font-h1 text-h1 text-white">Rp 532.750.000</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Chart Section -->
+            <div
+                class="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-surface-container-highest p-lg">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-h3 text-h3 text-on-surface">Income vs. Expense Trend</h3>
+                    <div class="flex gap-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                            <span class="font-body-sm text-body-sm text-on-surface-variant">Income</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-error"></div>
+                            <span class="font-body-sm text-body-sm text-on-surface-variant">Expense</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Placeholder for Chart.js Area Chart -->
+                <div
+                    class="w-full h-[300px] rounded-lg bg-surface flex items-end justify-between px-4 pb-0 relative overflow-hidden border border-surface-container border-b-0">
+                    <!-- Abstract representation of an area chart using pure CSS/HTML for aesthetic purposes since no JS is allowed -->
+                    <!-- Background Grid Lines -->
+                    <div class="absolute inset-0 flex flex-col justify-between pt-4 pb-8 z-0">
+                        <div class="w-full border-b border-surface-container-highest border-dashed opacity-50 flex-1">
+                        </div>
+                        <div class="w-full border-b border-surface-container-highest border-dashed opacity-50 flex-1">
+                        </div>
+                        <div class="w-full border-b border-surface-container-highest border-dashed opacity-50 flex-1">
+                        </div>
+                        <div class="w-full border-b border-surface-container-highest border-dashed opacity-50 flex-1">
+                        </div>
+                        <div class="w-full border-b border-surface-container-highest opacity-50 h-px"></div>
+                    </div>
+                    <!-- Area Graphics (Simulated) -->
+                    <div class="absolute inset-0 flex items-end z-10">
+                        <!-- Expense Area (Red) -->
+                        <div class="w-full h-[40%] bg-gradient-to-t from-red-100/50 to-transparent absolute bottom-8 left-0"
+                            style="clip-path: polygon(0 80%, 20% 60%, 40% 75%, 60% 40%, 80% 50%, 100% 30%, 100% 100%, 0 100%);">
+                        </div>
+                        <!-- Expense Line -->
+                        <svg class="absolute bottom-8 left-0 w-full h-full" preserveaspectratio="none"
+                            viewbox="0 0 100 100">
+                            <polyline class="text-error" fill="none" points="0,80 20,60 40,75 60,40 80,50 100,30"
+                                stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"></polyline>
+                        </svg>
+                        <!-- Income Area (Green) -->
+                        <div class="w-full h-[80%] bg-gradient-to-t from-emerald-100/40 to-transparent absolute bottom-8 left-0"
+                            style="clip-path: polygon(0 60%, 20% 30%, 40% 45%, 60% 20%, 80% 15%, 100% 10%, 100% 100%, 0 100%);">
+                        </div>
+                        <!-- Income Line -->
+                        <svg class="absolute bottom-8 left-0 w-full h-full" preserveaspectratio="none"
+                            viewbox="0 0 100 100">
+                            <polyline fill="none" points="0,60 20,30 40,45 60,20 80,15 100,10" stroke="#10b981"
+                                stroke-width="2" vector-effect="non-scaling-stroke"></polyline>
+                        </svg>
+                    </div>
+                    <!-- X-Axis Labels -->
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-8 flex justify-between items-center px-6 text-on-surface-variant font-label-sm text-label-sm z-20">
+                        <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Detail Transaksi Table -->
+            <div
+                class="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-surface-container-highest overflow-hidden">
+                <div class="p-6 border-b border-surface-container-highest flex justify-between items-center bg-white">
+                    <h3 class="font-h3 text-h3 text-on-surface">Detail Transaksi</h3>
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+                        <input
+                            class="pl-9 pr-4 py-1.5 bg-surface border border-outline-variant rounded-md font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-64"
+                            placeholder="Filter transactions..." type="text" />
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-surface-container-highest bg-surface-container-lowest/50">
+                                    Tanggal</th>
+                                <th
+                                    class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-surface-container-highest bg-surface-container-lowest/50">
+                                    Kategori</th>
+                                <th
+                                    class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-surface-container-highest bg-surface-container-lowest/50">
+                                    Plat Nomor</th>
+                                <th
+                                    class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-surface-container-highest bg-surface-container-lowest/50">
+                                    Deskripsi</th>
+                                <th
+                                    class="py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-surface-container-highest bg-surface-container-lowest/50 text-right">
+                                    Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody class="font-body-sm text-body-sm text-on-surface">
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="py-4 px-6 border-b border-surface-container-highest">12 Oct 2023</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-label-sm text-label-sm border border-emerald-100">
+                                        Sewa
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest text-on-surface-variant">
+                                    B 1234 CD</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">Sewa Toyota Innova (3
+                                    Hari) - PT Maju Jaya</td>
+                                <td
+                                    class="py-4 px-6 border-b border-surface-container-highest text-right font-medium text-emerald-600">
+                                    + Rp 1.500.000</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="py-4 px-6 border-b border-surface-container-highest">13 Oct 2023</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 text-error font-label-sm text-label-sm border border-red-100">
+                                        Servis
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest text-on-surface-variant">
+                                    B 5678 EF</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">Ganti Oli &amp; Filter
+                                    Toyota Avanza</td>
+                                <td
+                                    class="py-4 px-6 border-b border-surface-container-highest text-right font-medium text-error">
+                                    - Rp 450.000</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="py-4 px-6 border-b border-surface-container-highest">15 Oct 2023</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-label-sm text-label-sm border border-emerald-100">
+                                        Sewa
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest text-on-surface-variant">
+                                    D 9012 GH</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">Sewa Honda CR-V (1
+                                    Minggu) - Personal</td>
+                                <td
+                                    class="py-4 px-6 border-b border-surface-container-highest text-right font-medium text-emerald-600">
+                                    + Rp 4.200.000</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="py-4 px-6 border-b border-surface-container-highest">20 Oct 2023</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 text-gray-700 font-label-sm text-label-sm border border-gray-200">
+                                        Gaji
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest text-on-surface-variant">
+                                    -</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">Pembayaran Gaji Supir
+                                    (Budi Santoso)</td>
+                                <td
+                                    class="py-4 px-6 border-b border-surface-container-highest text-right font-medium text-error">
+                                    - Rp 3.500.000</td>
+                            </tr>
+                            <tr class="hover:bg-surface-container-low transition-colors group">
+                                <td class="py-4 px-6 border-b border-surface-container-highest">22 Oct 2023</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-label-sm text-label-sm border border-amber-100">
+                                        Asuransi
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest text-on-surface-variant">
+                                    B 1234 CD</td>
+                                <td class="py-4 px-6 border-b border-surface-container-highest">Premi Asuransi All-Risk
+                                    Tahunan</td>
+                                <td
+                                    class="py-4 px-6 border-b border-surface-container-highest text-right font-medium text-error">
+                                    - Rp 2.800.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination Footer -->
+                <div
+                    class="px-6 py-4 flex items-center justify-between border-t border-surface-container-highest bg-surface-container-lowest/50">
+                    <span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 5 of 142 entries</span>
+                    <div class="flex gap-2">
+                        <button
+                            class="px-3 py-1.5 border border-outline-variant rounded bg-white text-on-surface hover:bg-surface transition-colors font-label-sm text-label-sm disabled:opacity-50"
+                            disabled="">Previous</button>
+                        <button
+                            class="px-3 py-1.5 border border-outline-variant rounded bg-white text-on-surface hover:bg-surface transition-colors font-label-sm text-label-sm">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+# ── Monorepo: backend/ (Laravel), frontend/ (Vue), database/ ──────────────
+# Lihat docs/ARCHITECTURE.md
+
+# ── Secrets ───────────────────────────────────────────────────────────────
+.env
+.env.backup
+.env.*.local
+backend/.env
+frontend/.env
+frontend/.env.*.local
+
+# ── PHP / Laravel (backend) ────────────────────────────────────────────────
+backend/vendor/
+backend/node_modules/
+backend/public/build/
+backend/public/hot
+backend/public/storage
+backend/storage/*.key
+backend/storage/framework/cache/data/
+backend/storage/framework/sessions/
+backend/storage/framework/views/
+backend/storage/logs/
+backend/.phpunit.cache
+backend/.phpunit.result.cache
+backend/backups/
+
+# ── Node / Vue (frontend) ─────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/stats.html
+
+# ── Database ──────────────────────────────────────────────────────────────
+# Dump produksi berisi data pelanggan: jangan pernah di-commit.
+database/dumps/*.sql
+!database/dumps/.gitkeep
+*.sqlite
+
+# ── Editor / OS / tools ───────────────────────────────────────────────────
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log
+yarn-error.log
+
+# ── Scratch ───────────────────────────────────────────────────────────────
+create.md
+PROJECT_BRAIN.md
+auth.json
+Homestead.json
+Homestead.yaml
+database.drawio
+financial_dashboard.md
+.fleet

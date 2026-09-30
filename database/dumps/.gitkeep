@@ -1,0 +1,6 @@
+# SQL dumps live here but are intentionally git-ignored.
+# Lihat docs/DATABASE.md untuk cara regenerate dump dari migrations.
+#
+# File yang ada di folder ini:
+# - car_rent_legacy.sql    -> schema lama (Jun 2026), SUDAH BASI, hanya referensi
+# - activities_legacy.sql  -> sama seperti di atas, hanya referensi

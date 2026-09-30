@@ -1,0 +1,21 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "artillery": "^2.0.21",
+        "axios": "^1.6.4",
+        "laravel-vite-plugin": "^1.0",
+        "vite": "^6.4.3"
+    },
+    "dependencies": {
+        "chart.js": "^4.5.1",
+        "qr-scanner": "^1.4.2",
+        "quill": "^2.0.2",
+        "react": "^19.2.5",
+        "signature_pad": "^5.1.4"
+    }
+}

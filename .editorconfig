@@ -1,0 +1,45 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{yml,yaml,json}]
+indent_size = 2
+
+# ── Backend: Laravel / PHP / Blade ─────────────────────────────────────────
+[backend/**]
+indent_size = 4
+
+[backend/**/{package.json,composer.json}]
+indent_size = 4
+
+[backend/resources/js/**/*.js]
+indent_size = 4
+
+[backend/resources/css/**/*.css]
+indent_size = 4
+
+# ── Frontend: Vue 3 + Vite ─────────────────────────────────────────────────
+[frontend/**]
+indent_size = 2
+
+[frontend/**/*.vue]
+indent_size = 2
+
+[frontend/**/{package.json,*.config.js,*.config.ts}]
+indent_size = 2
+
+[frontend/**/*.md]
+trim_trailing_whitespace = false
+
+# ── Docs ───────────────────────────────────────────────────────────────────
+[docs/**.md]
+trim_trailing_whitespace = false

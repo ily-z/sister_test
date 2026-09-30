@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * ══════════════════════════════════════════════════════════════════════
+ *  DASAR
+ * ══════════════════════════════════════════════════════════════════════
+ *
+ *  Copied dari <style> di backend/resources/views/layouts/app.blade.php.
+ *  Scrollbar tipis dipakai di seluruh aplikasi, jadi meletakkannya di
+ *  sini sekali saja lebih baik daripada diulang per komponen.
+ */
+
+html {
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+    @apply bg-slate-50 text-slate-800 min-h-screen overflow-x-hidden;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Scrollbar tipis */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.12) transparent;
+    scrollbar-gutter: stable;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/*
+ * ══════════════════════════════════════════════════════════════════════
+ *  SIDEBAR DUA MODE (lebar / sempit)
+ * ══════════════════════════════════════════════════════════════════════
+ *
+ *  Di Blade, mode ini ditangani oleh toggle class .sidebar-collapsed
+ *  plus inline style width. Di Vue, state-nya hidup di AppLayout.vue
+ *  dan di-bind sebagai class -- bukan lagi dimanipulasi lewat
+ *  classList.add() dari seven terpisah.
+ *
+ *  Mode sempit hanya berlaku di desktop. Di mobile sidebar jadi drawer
+ *  full-width, jadi kelas .sidebar-text harus tetap tampil.
+ */
+
+.sidebar-collapsed .sidebar-text {
+    display: none;
+}
+
+.sidebar-collapsed .sidebar-submenu {
+    display: none !important;
+}
+
+.sidebar-collapsed #sidebarBrand {
+    display: none;
+}
+
+.sidebar-collapsed .sidebar-brand-row {
+    padding: 1.5rem 0.75rem;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    /* Hover-open: kembalikan teks dan submenu saat kursor di atas sidebar */
+    .sidebar-collapsed.sidebar-hover-open .sidebar-text {
+        display: revert;
+    }
+
+    .sidebar-collapsed.sidebar-hover-open .sidebar-submenu:not(.hidden) {
+        display: flex !important;
+    }
+
+    .sidebar-collapsed.sidebar-hover-open #sidebarBrand {
+        display: flex;
+    }
+
+    .sidebar-collapsed.sidebar-hover-open .sidebar-brand-row {
+        justify-content: space-between;
+        padding: 1.5rem;
+    }
+
+    .sidebar-collapsed.sidebar-hover-open {
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+        z-index: 60;
+    }
+}
+
+/*
+ * ══════════════════════════════════════════════════════════════════════
+ *  KOMPONEN BERSAMA
+ * ══════════════════════════════════════════════════════════════════════
+ *
+ *  Class yang muncul berulang-ulang di 50+ halaman Blade. Menaruhnya
+ *  sebagai @apply di sini mengurangi duplikasi dan, yang lebih penting,
+ *  membuat perubahan tampilan cukup di satu tempat.
+ */
+
+@layer components {
+    /* Kartu putih standar yang dipakai di seluruh halaman */
+    .pf-card {
+        @apply bg-white rounded-xl border border-slate-100 shadow-sm;
+    }
+
+    /* Tombol utama (CTA) */
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700
+               disabled:bg-slate-300 disabled:cursor-not-allowed text-white text-sm font-medium
+               px-4 py-2.5 rounded-lg transition-colors;
+    }
+
+    /* Tombol sekunder */
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 bg-white border border-slate-300
+               hover:bg-slate-50 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed
+               text-slate-700 text-sm font-medium px-4 py-2.5 rounded-lg transition-colors;
+    }
+
+    /* Tombol bahaya */
+    .btn-danger {
+        @apply inline-flex items-center justify-center gap-2 bg-rose-600 hover:bg-rose-700
+               disabled:bg-slate-300 disabled:cursor-not-allowed text-white text-sm font-medium
+               px-4 py-2.5 rounded-lg transition-colors;
+    }
+
+    /* Label form */
+    .form-label {
+        @apply block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2;
+    }
+
+    /* Input form */
+    .form-input {
+        @apply w-full bg-white border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm
+               text-slate-700 placeholder-slate-400
+               focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500
+               transition-all;
+    }
+
+    .form-input-error {
+        @apply border-rose-400 focus:border-rose-500 focus:ring-rose-500/20;
+    }
+
+    /* Badge status pembayaran */
+    .badge-lunas {
+        @apply px-2 py-1 rounded-md text-[10px] font-bold uppercase bg-emerald-50 text-emerald-600;
+    }
+
+    .badge-dp {
+        @apply px-2 py-1 rounded-md text-[10px] font-bold uppercase bg-amber-50 text-amber-600;
+    }
+
+    .badge-belum {
+        @apply px-2 py-1 rounded-md text-[10px] font-bold uppercase bg-rose-50 text-rose-600;
+    }
+
+    .badge-netral {
+        @apply px-2 py-1 rounded-md text-[10px] font-bold uppercase bg-slate-50 text-slate-600;
+    }
+
+    /* Link tabel */
+    .table-link {
+        @apply text-brand-600 hover:text-brand-700 font-semibold transition-colors;
+    }
+}
+
+/*
+ * ══════════════════════════════════════════════════════════════════════
+ *  UTILITAS
+ * ══════════════════════════════════════════════════════════════════════
+ */
+
+/*
+ * Ikon Material Symbols di dalam <span> perlu display inline-flex supaya
+ * lebarnya konsisten di tengah teks -- terutama di dalam tombol.
+ */
+.ms-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    flex-shrink: 0;
+}
